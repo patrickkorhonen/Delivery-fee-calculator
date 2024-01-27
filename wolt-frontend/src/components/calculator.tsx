@@ -117,7 +117,7 @@ const Calculator = () => {
             <label htmlFor="time" className="text-left ml-6 col-span-3 drop-shadow-lg ">
               Order Time
             </label>
-            <input onChange={event => setTime(event.target.value)} className="2xl:h-16 h-12 min-w-28 border-2 col-span-2 px-1 rounded-3xl shadow-md pl-6 text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="time" id="time" defaultValue={time} min="00:00" max="24:00"/>
+            <input onChange={event => setTime(event.target.value)} className="2xl:h-16 h-12 min-w-28 border-2 col-span-2 px-1 rounded-3xl shadow-md pl-6 text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="time" id="time" defaultValue={time} min="00:00" max="24:00"/>
       </div>
       {cartValue > 0 && deliveryDistance > 0 && itemAmount > 0 && date ? (
         <div className="flex justify-center mt-4 mb-4">
