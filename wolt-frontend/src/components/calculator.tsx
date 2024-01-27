@@ -77,7 +77,7 @@ const Calculator = () => {
               id="cartValue"
               min="0"
               onChange={event => setCartValue(Number(event.target.value))}
-              className="sm:h-16 h-12 min-w-full border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
+              className="sm:h-16 h-12 border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
             />
             <p className="text-center">€</p>
       </div>
@@ -90,7 +90,7 @@ const Calculator = () => {
               id="deliveryDistance"
               min="0"
               onChange={event => setDeliveryDistance(Number(event.target.value))}
-              className="sm:h-16 h-12 min-w-full border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
+              className="sm:h-16 h-12 border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
             />
             <p className="text-center">m</p>
       </div>
@@ -103,20 +103,20 @@ const Calculator = () => {
               id="NumberOfItems"
               min="0"
               onChange={event => setItemAmount(Number(event.target.value))}
-              className="sm:h-16 h-12 min-w-full border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
+              className="sm:h-16 h-12 border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
             />
       </div>
       <div className="grid grid-cols-6 items-center sm:h-24 h-16">
             <label htmlFor="date" className="text-left ml-6 col-span-3 drop-shadow-lg ">
               Order Date
             </label>
-            <input onChange={event => setDate(event.target.value)} className="sm:h-16 h-12 min-w-full border-2 col-span-2 px-1 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="date" id="date" defaultValue={date} />
+            <input onChange={event => setDate(event.target.value)} className="sm:h-16 h-12 min-w-60 border-2 col-span-2 px-1 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="date" id="date" defaultValue={date} />
       </div>
       <div className="grid grid-cols-6 items-center sm:h-24 h-16">
             <label htmlFor="time" className="text-left ml-6 col-span-3 drop-shadow-lg ">
               Order Time
             </label>
-            <input onChange={event => setTime(event.target.value)} className="sm:h-16 h-12 min-w-full border-2 col-span-2 px-1 rounded-3xl shadow-md pl-6 text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="time" id="time" defaultValue={time} min="00:00" max="24:00"/>
+            <input onChange={event => setTime(event.target.value)} className="sm:h-16 h-12 min-w-60 border-2 col-span-2 px-1 rounded-3xl shadow-md pl-6 text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="time" id="time" defaultValue={time} min="00:00" max="24:00"/>
       </div>
       {cartValue > 0 && deliveryDistance > 0 && itemAmount > 0 && date ? (
         <div className="flex justify-center mt-4 mb-4">
@@ -132,7 +132,7 @@ const Calculator = () => {
             <p className="ml-6 col-span-3 drop-shadow-lg">
               Delivery price
             </p>
-            <p className="sm:h-16 h-12 flex justify-center items-center border-2 col-span-2 rounded-3xl min-w-full shadow-md bg-sky-500">{deliveryFee}</p>
+            <p className="sm:h-16 h-12 flex justify-center items-center border-2 col-span-2 rounded-3xl shadow-md bg-sky-500">{deliveryFee}</p>
             <p className="text-center">€</p>
       </div>
     </div>
