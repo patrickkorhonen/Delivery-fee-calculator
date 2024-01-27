@@ -9,7 +9,7 @@ const Calculator = () => {
   const [time, setTime] = useState<string>(new Date().toTimeString().slice(0, 5))
   const [deliveryFee, setDeliveryFee] = useState<number>()
 
-  console.log(cartValue)
+  console.log(deliveryDistance % 1)
   //Checks if it is friday and rush hour
   const checkRushHour = () => {
     if (new Date(date).toString().slice(0, 3) == "Fri" && 1500 <= Number(time.replace(':', '')) && Number(time.replace(':', '')) <= 1900) {
@@ -111,7 +111,7 @@ const Calculator = () => {
             <label htmlFor="date" className="text-left ml-6 col-span-3 drop-shadow-lg ">
               Order Date
             </label>
-            <input onChange={event => setDate(event.target.value)} className="2xl:h-16 h-12 min-w-28 border-2 col-span-2 px-1 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="date" id="date" defaultValue={date} />
+            <input onChange={event => setDate(event.target.value)} className="2xl:h-16 h-12 min-w-28 border-2 col-span-2 px-1 rounded-3xl shadow-md text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="date" id="date" defaultValue={date} />
       </div>
       <div className="grid grid-cols-6 items-center 2xl:h-24 h-16">
             <label htmlFor="time" className="text-left ml-6 col-span-3 drop-shadow-lg ">
@@ -119,9 +119,9 @@ const Calculator = () => {
             </label>
             <input onChange={event => setTime(event.target.value)} className="2xl:h-16 h-12 min-w-28 border-2 col-span-2 px-1 rounded-3xl shadow-md pl-6 text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="time" id="time" defaultValue={time} min="00:00" max="24:00"/>
       </div>
-      {cartValue > 0 && deliveryDistance > 0 && itemAmount > 0 && date ? (
+      {cartValue > 0 && deliveryDistance > 0 && deliveryDistance % 1 === 0 && itemAmount > 0 && date ? (
         <div className="flex justify-center mt-4 mb-4">
-        <button onClick={() => calculate()} className="rounded-full w-full mx-10 px-20 py-6 shadow-xl drop-shadow-lg bg-sky-600 hover:bg-sky-700">Calculate</button>
+        <button onClick={() => calculate()} className="rounded-full w-full mx-10 px-20 py-4 2xl:py-6 shadow-xl drop-shadow-lg bg-sky-600 hover:bg-sky-700">Calculate</button>
       </div>
       ) : (
         <div className="flex justify-center mt-4 mb-4">
