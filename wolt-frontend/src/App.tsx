@@ -3,7 +3,7 @@ import Calculator from "./components/calculator";
 
 function App() {
   return (
-    <div className="bg-[#00c2e8] min-h-screen grid xl:grid-cols-2">
+    <div className="bg-[#00c2e8] min-h-lvh grid xl:grid-cols-2">
       <div className="flex flex-col sm:my-10 drop-shadow-xl mx-auto justify-center text-white text-4xl md:text-7xl xl:text-8xl 2xl:text-9xl font-inter font-bold">
         <p>Calculate</p>
         <p>delivery</p>
