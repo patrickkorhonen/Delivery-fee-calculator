@@ -118,7 +118,7 @@ const Calculator = () => {
             <input onChange={event => {
               setDate(event.target.value.split('T')[0]) 
               setTime(event.target.value.split('T')[1])
-            }} className="2xl:h-16 h-12 min-w-[8.5rem] text-xs sm:text-base min-[1800px]:text-2xl border-2 col-span-3 px-1 rounded-3xl shadow-md text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="datetime-local" data-test-id="orderTime" id="orderTime" defaultValue={date + 'T' + time} />
+            }} className="2xl:h-16 h-12 min-w-[8.4rem] text-xs sm:text-base min-[1800px]:text-2xl border-2 col-span-3 px-1 rounded-3xl shadow-md text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="datetime-local" data-test-id="orderTime" id="orderTime" defaultValue={date + 'T' + time} />
       </div>
       {cartValue > 0 && deliveryDistance > 0 && deliveryDistance % 1 === 0 && itemAmount > 0 && date ? (
         <div className="flex justify-center mt-4 mb-4">
