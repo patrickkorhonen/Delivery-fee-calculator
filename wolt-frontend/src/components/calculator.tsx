@@ -9,7 +9,7 @@ const Calculator = () => {
   const [time, setTime] = useState<string>(new Date().toTimeString().slice(0, 5))
   const [deliveryFee, setDeliveryFee] = useState<number>()
 
-  console.log(deliveryDistance % 1)
+
   //Checks if it is friday and rush hour
   const checkRushHour = () => {
     if (new Date(date).toString().slice(0, 3) == "Fri" && 1500 <= Number(time.replace(':', '')) && Number(time.replace(':', '')) <= 1900) {
@@ -52,6 +52,7 @@ const Calculator = () => {
     }
   }
 
+  //This handles the fee calculation and returns the final price
   const calculate = () => {
     if (cartValue >= 200) {
       setDeliveryFee(0)
@@ -65,10 +66,11 @@ const Calculator = () => {
     }
   }
 
+  // I am made responsive design with tailwind
   return (
     <div className="sm:text-xl 2xl:text-2xl text-sm font-inter shadow-2xl text-white rounded-3xl mb-8 xl:mb-0 bg-sky-500">
-      <div className="grid grid-cols-6  items-center 2xl:h-24 h-16 mt-6">
-            <label htmlFor="cartValue" className="ml-6 col-span-3 drop-shadow-lg">
+      <div className="grid grid-cols-8  items-center 2xl:h-24 h-16 mt-6">
+            <label htmlFor="cartValue" className="ml-6 col-span-4 drop-shadow-lg">
               Cart value
             </label>
             <input
@@ -78,46 +80,45 @@ const Calculator = () => {
               id="cartValue"
               min="0"
               onChange={event => setCartValue(Number(event.target.value))}
-              className="2xl:h-16 h-12 border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
+              className="2xl:h-16 h-12 border-2 col-span-3 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
             />
             <p className="text-center">€</p>
       </div>
-      <div className="grid grid-cols-6 items-center 2xl:h-24 h-16">
-            <label htmlFor="deliveryDistance" className="ml-6 col-span-3 drop-shadow-lg ">
+      <div className="grid grid-cols-8 items-center 2xl:h-24 h-16">
+            <label htmlFor="deliveryDistance" className="ml-6 col-span-4 drop-shadow-lg ">
               Delivery distance
             </label>
             <input
               type="number"
+              data-test-id="deliveryDistance"
               id="deliveryDistance"
               min="0"
               onChange={event => setDeliveryDistance(Number(event.target.value))}
-              className="2xl:h-16 h-12 border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
+              className="2xl:h-16 h-12 border-2 col-span-3 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
             />
             <p className="text-center">m</p>
       </div>
-      <div className="grid grid-cols-6 items-center 2xl:h-24 h-16">
-            <label htmlFor="NumberOfItems" className="text-left col-span-3 ml-6 drop-shadow-lg ">
+      <div className="grid grid-cols-8 items-center 2xl:h-24 h-16">
+            <label htmlFor="numberOfItems" className="text-left col-span-4 ml-6 drop-shadow-lg ">
               Number of items
             </label>
             <input
               type="number"
-              id="NumberOfItems"
+              data-test-id="numberOfItems"
+              id="numberOfItems"
               min="0"
               onChange={event => setItemAmount(Number(event.target.value))}
-              className="2xl:h-16 h-12 border-2 col-span-2 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
+              className="2xl:h-16 h-12 border-2 col-span-3 rounded-3xl shadow-md text-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700"
             />
       </div>
-      <div className="grid grid-cols-6 items-center 2xl:h-24 h-16">
-            <label htmlFor="date" className="text-left ml-6 col-span-3 drop-shadow-lg ">
-              Order Date
+      <div className="grid grid-cols-8 items-center 2xl:h-24 h-16">
+            <label htmlFor="orderTime" className="text-left ml-6 col-span-4 drop-shadow-lg ">
+              Order Date & Time
             </label>
-            <input onChange={event => setDate(event.target.value)} className="2xl:h-16 h-12 min-w-28 border-2 col-span-2 px-1 rounded-3xl shadow-md text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="date" id="date" defaultValue={date} />
-      </div>
-      <div className="grid grid-cols-6 items-center 2xl:h-24 h-16">
-            <label htmlFor="time" className="text-left ml-6 col-span-3 drop-shadow-lg ">
-              Order Time
-            </label>
-            <input onChange={event => setTime(event.target.value)} className="2xl:h-16 h-12 min-w-28 border-2 col-span-2 px-1 rounded-3xl shadow-md pl-6 text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="time" id="time" defaultValue={time} min="00:00" max="24:00"/>
+            <input onChange={event => {
+              setDate(event.target.value.split('T')[0]) 
+              setTime(event.target.value.split('T')[1])
+            }} className="2xl:h-16 h-12 min-w-32 text-xs sm:text-base min-[1800px]:text-2xl border-2 col-span-3 px-1 rounded-3xl shadow-md text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="datetime-local" data-test-id="orderTime" id="orderTime" defaultValue={date + 'T' + time} />
       </div>
       {cartValue > 0 && deliveryDistance > 0 && deliveryDistance % 1 === 0 && itemAmount > 0 && date ? (
         <div className="flex justify-center mt-4 mb-4">
@@ -129,11 +130,11 @@ const Calculator = () => {
       </div>
       )}
       
-      <div className="grid grid-cols-6  items-center 2xl:h-24 mb-4">
-            <p className="ml-6 col-span-3 drop-shadow-lg">
+      <div className="grid grid-cols-8  items-center 2xl:h-24 mb-4">
+            <p className="ml-6 col-span-4 drop-shadow-lg">
               Delivery price
             </p>
-            <p className="2xl:h-16 h-12 flex justify-center items-center border-2 col-span-2 rounded-3xl shadow-md bg-sky-500">{deliveryFee}</p>
+            <p data-test-id="fee" className="2xl:h-16 h-12 flex justify-center items-center border-2 col-span-3 rounded-3xl shadow-md bg-sky-500">{deliveryFee}</p>
             <p className="text-center">€</p>
       </div>
     </div>
