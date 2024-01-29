@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Calculator = () => {
 
@@ -9,6 +9,10 @@ const Calculator = () => {
   const [time, setTime] = useState<string>(new Date().toTimeString().slice(0, 5))
   const [deliveryFee, setDeliveryFee] = useState<number>()
 
+  //When any input changes, previous delivery price is not shown anymore 
+  useEffect(() => {
+    setDeliveryFee(undefined)
+  }, [cartValue, deliveryDistance, itemAmount, date, time]);
 
   //Checks if it is friday and rush hour
   const checkRushHour = () => {
@@ -66,7 +70,7 @@ const Calculator = () => {
     }
   }
 
-  // I am made responsive design with tailwind
+  //I made responsive design with tailwind
   return (
     <div className="sm:text-xl 2xl:text-2xl text-sm font-inter shadow-2xl text-white rounded-3xl mb-8 xl:mb-0 bg-sky-500">
       <div className="grid grid-cols-8  items-center 2xl:h-24 h-16 mt-6">
@@ -118,9 +122,9 @@ const Calculator = () => {
             <input onChange={event => {
               setDate(event.target.value.split('T')[0]) 
               setTime(event.target.value.split('T')[1])
-            }} className="2xl:h-16 h-12 min-w-[8.4rem] text-xs sm:text-base min-[1800px]:text-2xl border-2 col-span-3 px-1 rounded-3xl shadow-md text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="datetime-local" data-test-id="orderTime" id="orderTime" defaultValue={date + 'T' + time} />
+            }} className="2xl:h-16 h-12 min-w-[8.3rem] text-xs sm:text-base min-[1800px]:text-2xl border-2 col-span-3 px-1 rounded-3xl shadow-md text-center flex items-center justify-center bg-sky-500 hover:bg-sky-400 invalid:border-red-700 invalid:text-red-700" type="datetime-local" data-test-id="orderTime" id="orderTime" defaultValue={date + 'T' + time} />
       </div>
-      {cartValue > 0 && deliveryDistance > 0 && deliveryDistance % 1 === 0 && itemAmount > 0 && date ? (
+      {cartValue > 0 && deliveryDistance > 0 && deliveryDistance % 1 === 0 && itemAmount > 0 && itemAmount % 1 === 0 && date ? (
         <div className="flex justify-center mt-4 mb-4">
         <button onClick={() => calculate()} className="rounded-full w-full mx-10 px-20 py-4 2xl:py-6 shadow-xl drop-shadow-lg bg-sky-600 hover:bg-sky-700">Calculate</button>
       </div>
@@ -129,12 +133,11 @@ const Calculator = () => {
         <button className="rounded-full w-full mx-10 px-20 py-4 2xl:py-6 shadow-xl drop-shadow-lg text-gray-400 bg-gray-300">Calculate</button>
       </div>
       )}
-      
       <div className="grid grid-cols-8  items-center 2xl:h-24 mb-4">
             <p className="ml-6 col-span-4 drop-shadow-lg">
               Delivery price
             </p>
-            <p data-test-id="fee" className="2xl:h-16 h-12 flex justify-center items-center border-2 col-span-3 rounded-3xl shadow-md bg-sky-500">{deliveryFee}</p>
+            <p data-test-id="fee" data-testid="fee" className="2xl:h-16 h-12 flex justify-center items-center border-2 col-span-3 rounded-3xl shadow-md bg-sky-500">{deliveryFee}</p>
             <p className="text-center">€</p>
       </div>
     </div>
