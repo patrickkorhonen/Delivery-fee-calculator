@@ -1,6 +1,4 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from './App';
 import Calculator from './components/calculator';
 import userEvent from '@testing-library/user-event';
 
